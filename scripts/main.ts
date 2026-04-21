@@ -26,14 +26,17 @@ interface Args {
   output?: string;
   wait: boolean;
   timeout: number;
+  headless: boolean;
 }
 
 function parseArgs(argv: string[]): Args {
-  const args: Args = { url: "", wait: false, timeout: DEFAULT_TIMEOUT_MS };
+  const args: Args = { url: "", wait: false, timeout: DEFAULT_TIMEOUT_MS, headless: true };
   for (let i = 2; i < argv.length; i++) {
     const arg = argv[i];
     if (arg === "--wait" || arg === "-w") {
       args.wait = true;
+    } else if (arg === "--no-headless") {
+      args.headless = false;
     } else if (arg === "-o" || arg === "--output") {
       args.output = argv[++i];
     } else if (arg === "--timeout" || arg === "-t") {
@@ -86,7 +89,7 @@ async function waitForUserSignal(): Promise<void> {
 
 async function captureUrl(args: Args): Promise<ConversionResult> {
   const port = await getFreePort();
-  const chrome = await launchChrome(args.url, port, false);
+  const chrome = await launchChrome(args.url, port, args.headless);
 
   let cdp: CdpConnection | null = null;
   try {

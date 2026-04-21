@@ -79,6 +79,7 @@ npx -y bun ${SKILL_DIR}/scripts/main.ts <url> -o output.md
 | `-o <path>` | Output file path (default: auto-generated) |
 | `--wait` | Wait for user signal before capturing |
 | `--timeout <ms>` | Page load timeout (default: 30000) |
+| `--no-headless` | Show browser window (default: headless) |
 
 ## Capture Modes
 

@@ -19,7 +19,7 @@ export function resolveUserDataRoot(): string {
 export function resolveUrlToMarkdownDataDir(): string {
   const override = process.env.URL_DATA_DIR?.trim();
   if (override) return path.resolve(override);
-  return path.join(process.cwd(), URL_TO_MARKDOWN_DATA_DIR);
+  return path.join(os.homedir(), "outputs", "baoyu-url-to-markdown");
 }
 
 export function resolveUrlToMarkdownChromeProfileDir(): string {
